@@ -148,7 +148,7 @@ public class ModiFen extends JFrame implements ActionListener {
                         addObj(requete);
                         list = affichFull("service");
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         this.result(list);
                         }
                 break;
@@ -172,7 +172,7 @@ public class ModiFen extends JFrame implements ActionListener {
                         addObj(requete);
                         list = affichFull("chambre");
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         this.result(list);
                     }
                 break;
@@ -195,7 +195,7 @@ public class ModiFen extends JFrame implements ActionListener {
                         addObj(requete);
                         list = affichFull("employe");
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         this.result(list);
                     }
                     break;
@@ -215,7 +215,7 @@ public class ModiFen extends JFrame implements ActionListener {
                         addObj(requete);
                         list = affichFull("docteur");
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         this.result(list);
                     }
                     break;
@@ -241,7 +241,7 @@ public class ModiFen extends JFrame implements ActionListener {
                         addObj(requete);
                         list = affichFull("infirmier");
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         this.result(list);
                     }
                 break;
@@ -268,7 +268,7 @@ public class ModiFen extends JFrame implements ActionListener {
                         addObj(requete);
                         list = affichFull("malade");
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         this.result(list);
                     }
                     break;
@@ -289,7 +289,7 @@ public class ModiFen extends JFrame implements ActionListener {
                         addObj(requete);
                         list = affichFull("hospitalisation");
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         this.result(list);
                     }
                 break;
@@ -309,7 +309,7 @@ public class ModiFen extends JFrame implements ActionListener {
                         addObj(requete);
                         list = affichFull("soigne");
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         this.result(list);
                     }
                     break;
@@ -328,7 +328,7 @@ public class ModiFen extends JFrame implements ActionListener {
             int nb=0;
             String requete;
             requete = "";
-            ArrayList list = null;
+            ArrayList<String> list = new ArrayList<String>();
             switch(index){
                 case 0 :
                     String ser0 = menu.txt_service.get(0).getText().trim();
@@ -337,6 +337,7 @@ public class ModiFen extends JFrame implements ActionListener {
                     String ser3 = menu.txt_service.get(3).getText().trim();
                     
                     if(ser0.compareTo("")==0 && ser1.compareTo("")==0 && ser2.compareTo("")==0 && ser3.compareTo("")==0){
+                        resultat.removeAll();
                         System.out.println("Veuillez remplir au moins un champs");
                     }
                     else{
@@ -369,10 +370,11 @@ public class ModiFen extends JFrame implements ActionListener {
                             firstCondition = false;
                             }
                         deleteObj("service",requete);
-                        resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
                         list = affichFull("service");
+                        resultat.removeAll();
+                        resultat.setLayout(new GridLayout(0,1));
                         this.result(list);
+                        
                     }
                     break;
                     
@@ -383,6 +385,7 @@ public class ModiFen extends JFrame implements ActionListener {
                     String cha3 = menu.txt_chambre.get(3).getText().trim();
                     
                     if(cha0.compareTo("")==0 && cha1.compareTo("")==0 && cha2.compareTo("")==0 && cha3.compareTo("")==0){
+                        resultat.removeAll();
                         System.out.println("Veuillez remplir au moins un champs");
                     }
                     else{
@@ -398,27 +401,27 @@ public class ModiFen extends JFrame implements ActionListener {
                             if(!firstCondition){
                                 requete +=" AND ";
                             }
-                            requete +="code_service="+cha1+"'";
+                            requete +="code_service='"+cha1+"'";
                             firstCondition = false;
                             }
                         if(cha2.compareTo("")!=0){
                             if(!firstCondition){
                                 requete +=" AND ";
                             }
-                            requete +="surveillant="+cha2+"'";
+                            requete +="surveillant='"+cha2+"'";
                             firstCondition = false;
                             }
                         if(cha3.compareTo("")!=0){
                             if(!firstCondition){
                                 requete +=" AND ";
                             }
-                            requete +="nb_lits="+cha3+"'";
+                            requete +="nb_lits='"+cha3+"'";
                             firstCondition = false;
                             }
                         
                         deleteObj("chambre",requete);
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         list = affichFull("chambre");
                         this.result(list);
                     }
@@ -432,6 +435,7 @@ public class ModiFen extends JFrame implements ActionListener {
                     String emp4 = menu.txt_employe.get(4).getText().trim();
                     
                     if(emp0.compareTo("")==0 && emp1.compareTo("")==0 && emp2.compareTo("")==0 && emp3.compareTo("")==0&& emp4.compareTo("")==0){ // si aucune saisie 
+                        resultat.removeAll();
                         System.out.println("Veuillez remplir au moins un champs");
                     }
                     else{
@@ -472,9 +476,9 @@ public class ModiFen extends JFrame implements ActionListener {
                         }
                         
                         deleteObj("employe",requete);
-                        resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
                         list = affichFull("employe");
+                        resultat.removeAll();
+                        resultat.setLayout(new GridLayout(0,1));
                         this.result(list);
                     }
                     break;
@@ -484,6 +488,7 @@ public class ModiFen extends JFrame implements ActionListener {
                     String doc1 = menu.txt_docteur.get(1).getText().trim();
                     
                     if(doc0.compareTo("")==0 && doc1.compareTo("")==0){ // si aucune saisie 
+                        resultat.removeAll();
                         System.out.println("Veuillez remplir au moins un champs");
                     }
                     else{
@@ -504,7 +509,7 @@ public class ModiFen extends JFrame implements ActionListener {
                         }
                         deleteObj("docteur",requete);
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         list = affichFull("docteur");
                         this.result(list);
                     }
@@ -517,6 +522,7 @@ public class ModiFen extends JFrame implements ActionListener {
                     String inf3 = menu.txt_infirmier.get(3).getText().trim();
                     
                     if(inf0.compareTo("")==0 && inf1.compareTo("")==0 && inf2.compareTo("")==0 && inf3.compareTo("")==0){ // si aucune saisie 
+                        resultat.removeAll();
                         System.out.println("Veuillez remplir au moins un champs");
                     }
                     else{
@@ -551,7 +557,7 @@ public class ModiFen extends JFrame implements ActionListener {
                             }
                         deleteObj("infirmier",requete);
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         list = affichFull("infirmier");
                         this.result(list);
                     }
@@ -566,6 +572,7 @@ public class ModiFen extends JFrame implements ActionListener {
                     String mal5 = menu.txt_malade.get(5).getText().trim();
                     
                     if(mal0.compareTo("")==0 && mal1.compareTo("")==0 && mal2.compareTo("")==0 && mal3.compareTo("")==0&& mal4.compareTo("")==0 && mal5.compareTo("")==0){ // si aucune saisie 
+                        resultat.removeAll();
                         System.out.println("Veuillez remplir au moins un champs");
                     }
                     else{
@@ -613,7 +620,7 @@ public class ModiFen extends JFrame implements ActionListener {
                         }
                         deleteObj("malade",requete);
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         list = affichFull("malade");
                         this.result(list);
                     }
@@ -626,6 +633,7 @@ public class ModiFen extends JFrame implements ActionListener {
                     String hos3 = menu.txt_hospitalisation.get(3).getText().trim();
                     
                     if(hos0.compareTo("")==0 && hos1.compareTo("")==0 && hos2.compareTo("")==0 && hos3.compareTo("")==0){
+                        resultat.removeAll();
                         System.out.println("Veuillez remplir au moins un champs");
                     }
                     else{
@@ -641,7 +649,7 @@ public class ModiFen extends JFrame implements ActionListener {
                             if(!firstCondition){
                                 requete +=" AND ";
                             }
-                            requete +="code_service="+hos1+"'";
+                            requete +="code_service='"+hos1+"'";
                             firstCondition = false;
                             }
                         if(hos2.compareTo("")!=0){
@@ -656,13 +664,13 @@ public class ModiFen extends JFrame implements ActionListener {
                             if(!firstCondition){
                                 requete +=" AND ";
                             }
-                            requete +="lit="+hos3+"'";
+                            requete +="lit='"+hos3+"'";
                             firstCondition = false;
                             }
                         
                         deleteObj("hospitalisation",requete);
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         list = affichFull("hospitalisation");
                         this.result(list);
                     }
@@ -674,6 +682,7 @@ public class ModiFen extends JFrame implements ActionListener {
                     
                     
                     if(soi0.compareTo("")==0 && soi1.compareTo("")==0){
+                        resultat.removeAll();
                         System.out.println("Veuillez remplir au moins un champs");
                     }
                     else{
@@ -697,7 +706,7 @@ public class ModiFen extends JFrame implements ActionListener {
                         
                         deleteObj("soin",requete);
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         list = affichFull("soin");
                         this.result(list);
                     }
