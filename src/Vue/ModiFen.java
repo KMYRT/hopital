@@ -105,7 +105,7 @@ public class ModiFen extends JFrame implements ActionListener {
             ArrayList<String> list = new ArrayList<String>();
             switch(index){
                 case 0: //Service
-                    int nb;
+                    //int nb;
                     String ser0 = menu.txt_service.get(0).getText().trim();
                     String ser1 = menu.txt_service.get(1).getText().trim();
                     String ser2 = menu.txt_service.get(2).getText().trim();
@@ -116,7 +116,7 @@ public class ModiFen extends JFrame implements ActionListener {
                         System.out.println("Remplir tout les champs !");
                     }
                     else{
-                        nb = Integer.parseInt(menu.txt_service.get(3).getText().trim());
+                        //nb= Integer.parseInt(menu.txt_service.get(3).getText().trim());
                         resultat.removeAll();
                         resultat.setLayout(new GridLayout(0,2));
                         requete = "INSERT INTO service (code, nom, batiment, directeur) VALUES ('"+ser0+"', '"+ser1+"', '"+ser2+"', '"+ser3+"')";
@@ -129,61 +129,49 @@ public class ModiFen extends JFrame implements ActionListener {
                 break;
                     
                 case 1: //Chambre
-                    int nb1,nb2,nb3;
+                    //int nb1,nb2,nb3;
                     String cha0 = menu.txt_chambre.get(0).getText().trim();
                     String cha1 = menu.txt_chambre.get(1).getText().trim();
                     String cha2 = menu.txt_chambre.get(2).getText().trim();
                     String cha3 = menu.txt_chambre.get(3).getText().trim();
                     
-                    if(cha0.compareTo("")!=0 | cha1.compareTo("")!=0 | cha2.compareTo("")!=0 | cha3.compareTo("")!=0){ // si il manque une saisie
+                    if(cha0.compareTo("")==0 | cha1.compareTo("")==0 | cha2.compareTo("")==0 | cha3.compareTo("")==0){ // si il manque une saisie
                         resultat.removeAll();
                         System.out.println("Remplir tout les champs !");
                     }
                     else{
-                        
-                            nb1 = Integer.parseInt(menu.txt_chambre.get(1).getText().trim());
-                            nb2 = Integer.parseInt(menu.txt_chambre.get(2).getText().trim());
-                            nb3 = Integer.parseInt(menu.txt_chambre.get(3).getText().trim());
-                            resultat.removeAll();
-                            resultat.setLayout(new GridLayout(0,2));
-                            requete = "INSERT INTO chambre (code_service,no_chambre,surveillant,nb_lits) VALUES ('"+cha0+"','"+cha1+"','"+cha2+"','"+cha3+"')";
-                            
-                    try {
-                        list=connexion.remplirChampsRequete(requete);
-                    } catch (SQLException exc) {
-                           System.out.println("Erreur SQL ");
-                    }
-                            
+                        //nb1 = Integer.parseInt(cha1);
+                        //nb2 = Integer.parseInt(cha2);
+                        //nb3 = Integer.parseInt(cha3);
+                        resultat.removeAll();
+                        resultat.setLayout(new GridLayout(0,2));
+                        requete = "INSERT INTO chambre (code_service,no_chambre,surveillant,nb_lits) VALUES ('"+cha0+"','"+cha1+"','"+cha2+"','"+cha3+"')";
+                        addAtt(requete);
+                        list = affichFull("chambre");
                         resultat.removeAll();
                         resultat.setLayout(new GridLayout(0,2));
                         this.result(list);
                     }
-                    break;
+                break;
 
                 case 2: //Employe
+                    //int nb0;
                     String emp0 = menu.txt_employe.get(0).getText().trim();
                     String emp1 = menu.txt_employe.get(1).getText().trim();
                     String emp2 = menu.txt_employe.get(2).getText().trim();
                     String emp3 = menu.txt_employe.get(3).getText().trim();
                     String emp4 = menu.txt_employe.get(4).getText().trim();
                     
-                    if(emp0.compareTo("")!=0 | emp1.compareTo("")!=0 | emp2.compareTo("")!=0 | emp3.compareTo("")!=0 | emp4.compareTo("")!=0){ // si aucune saisie 
+                    if(emp0.compareTo("")==0 | emp1.compareTo("")==0 | emp2.compareTo("")==0 | emp3.compareTo("")==0 | emp4.compareTo("")==0){ // si aucune saisie 
                         resultat.removeAll();
                         System.out.println("Remplir tout les champs !");
                     }
                     else{
-                        
-                            nb = Integer.parseInt(menu.txt_employe.get(0).getText().trim());
-                            resultat.removeAll();
-                            resultat.setLayout(new GridLayout(0,2));
-                            requete = "INSERT INTO malade (numero,nom,prenom,adresse,tel) VALUES ('"+emp0+"','"+emp1+"','"+emp2+"','"+emp3+"','"+emp4+"')";
-                            
-                    try {
-                        list=connexion.remplirChampsRequete(requete);
-                    } catch (SQLException exc) {
-                           System.out.println("Erreur SQL 6");
-                    }
-                            
+                        //nb0 = Integer.parseInt(emp0);
+                        resultat.removeAll();
+                        resultat.setLayout(new GridLayout(0,2));
+                        requete = "INSERT INTO employe (numero,nom,prenom,adresse,tel) VALUES ('"+emp0+"','"+emp1+"','"+emp2+"','"+emp4+"','"+emp3+"')";addAtt(requete);
+                        list = affichFull("employe");
                         resultat.removeAll();
                         resultat.setLayout(new GridLayout(0,2));
                         this.result(list);
