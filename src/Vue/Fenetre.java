@@ -225,6 +225,19 @@ public class Fenetre extends JFrame implements ActionListener {
             
         }
     
+    /**
+     * Méthode privée qui initialise la liste des requetes de selection
+     */
+    private void remplirRequetes() {
+        connexion.ajouterRequete("SELECT prenom, nom FROM malade WHERE mutuelle='MAAF;");
+        connexion.ajouterRequete("SELECT employe.prenom, Emp.*, Mission.* FROM Dept, Emp, Mission WHERE Dept.deptno=Emp.deptno AND Emp.empno=Mission.empno;");
+        connexion.ajouterRequete("SELECT AVG (Emp.sal) FROM Emp, Mission WHERE Emp.empno = Mission.empno;");
+        connexion.ajouterRequete("SELECT Dept.*, Emp.* FROM Dept, Emp WHERE Dept.deptno=Emp.deptno AND comm>0;");
+        connexion.ajouterRequete("SELECT hiredate, empno, ename FROM Emp WHERE (((hiredate)>='1981-05-01' And (hiredate)<'1981-05-31'))ORDER BY hiredate;");
+        connexion.ajouterRequete("SELECT ename, job FROM Emp ORDER BY job;");
+        connexion.ajouterRequete("SELECT DISTINCT dname, job FROM Dept, Emp WHERE Dept.deptno=Emp.deptno AND job='Clerk';");
+    }
+    
     
    
     @Override
@@ -252,7 +265,7 @@ public class Fenetre extends JFrame implements ActionListener {
             menu0.setSelectedIndex(2);
         }
         else if (source == exeRequete){
-            this.reqSelect = new FeneReq(connexion);
+            this.reqSelect = new requAjout(connexion);
         }
         
         else if(source == modifBDD ){
