@@ -260,6 +260,104 @@ public class Fenetre extends JFrame implements ActionListener {
             requete = "";
             ArrayList list = null;
             switch(index){
+                case 0 :
+                    String ser0 = attributs.txt_service.get(0).getText().trim();
+                    String ser1 = attributs.txt_service.get(1).getText().trim();
+                    String ser2 = attributs.txt_service.get(2).getText().trim();
+                    String ser3 = attributs.txt_service.get(3).getText().trim();
+                    
+                    if(ser0.compareTo("")==0 && ser1.compareTo("")==0 && ser2.compareTo("")==0 && ser3.compareTo("")==0){
+                        resultat.removeAll();
+                        resultat.setLayout(new GridLayout(0,2));
+                        list =affichFull("service"); //on appelle la fonction de base des requetes
+                        this.result(list);
+                    }
+                    else{
+                        if(ser0.compareTo("")!=0){
+                            nb = Integer.parseInt(attributs.txt_service.get(0).getText().trim());
+                            if(!firstCondition){
+                                requete +=" AND ";
+                            }
+                            requete +="code="+nb;
+                            firstCondition = false;
+                            }
+                        if(ser1.compareTo("")!=0){
+                            if(!firstCondition){
+                                requete +=" AND ";
+                            }
+                            requete +="nom="+ser1+"'";
+                            firstCondition = false;
+                            }
+                        if(ser2.compareTo("")!=0){
+                            if(!firstCondition){
+                                requete +=" AND ";
+                            }
+                            requete +="batiment="+ser2+"'";
+                            firstCondition = false;
+                            }
+                        if(ser3.compareTo("")!=0){
+                            if(!firstCondition){
+                                requete +=" AND ";
+                            }
+                            requete +="directeur="+ser3+"'";
+                            firstCondition = false;
+                            }
+                        
+                        resultat.removeAll();
+                        resultat.setLayout(new GridLayout(0,2));
+                        list = requete("service",requete);
+                        this.result(list);
+                    }
+                    break;
+                    
+                case 1 :
+                    String cha0 = attributs.txt_chambre.get(0).getText().trim();
+                    String cha1 = attributs.txt_chambre.get(1).getText().trim();
+                    String cha2 = attributs.txt_chambre.get(2).getText().trim();
+                    String cha3 = attributs.txt_chambre.get(3).getText().trim();
+                    
+                    if(cha0.compareTo("")==0 && cha1.compareTo("")==0 && cha2.compareTo("")==0 && cha3.compareTo("")==0){
+                        resultat.removeAll();
+                        resultat.setLayout(new GridLayout(0,2));
+                        list =affichFull("chambre"); //on appelle la fonction de base des requetes
+                        this.result(list);
+                    }
+                    else{
+                        if(cha0.compareTo("")!=0){
+                            if(!firstCondition){
+                                requete +=" AND ";
+                            }
+                            requete +="no_chambre="+cha1+"'";
+                            firstCondition = false;
+                            }
+                        if(cha1.compareTo("")!=0){
+                            if(!firstCondition){
+                                requete +=" AND ";
+                            }
+                            requete +="surveillant="+cha1+"'";
+                            firstCondition = false;
+                            }
+                        if(cha2.compareTo("")!=0){
+                            if(!firstCondition){
+                                requete +=" AND ";
+                            }
+                            requete +="nb_lits="+cha2+"'";
+                            firstCondition = false;
+                            }
+                        if(cha3.compareTo("")!=0){
+                            if(!firstCondition){
+                                requete +=" AND ";
+                            }
+                            requete +="code_service="+cha3+"'";
+                            firstCondition = false;
+                            }
+                        
+                        resultat.removeAll();
+                        resultat.setLayout(new GridLayout(0,2));
+                        list = requete("chambre",requete);
+                        this.result(list);
+                    }
+                    break;
                 
                 case 2 :
                     String emp0 = attributs.txt_employe.get(0).getText().trim();
@@ -462,7 +560,91 @@ public class Fenetre extends JFrame implements ActionListener {
                         list = requete("malade",requete);
                         this.result(list);
                     }
-                    break;                                                
+                    break;
+                    
+                case 6 :
+                    String hos0 = attributs.txt_hospitalisation.get(0).getText().trim();
+                    String hos1 = attributs.txt_hospitalisation.get(1).getText().trim();
+                    String hos2 = attributs.txt_hospitalisation.get(2).getText().trim();
+                    String hos3 = attributs.txt_hospitalisation.get(3).getText().trim();
+                    
+                    if(hos0.compareTo("")==0 && hos1.compareTo("")==0 && hos2.compareTo("")==0 && hos3.compareTo("")==0){
+                        resultat.removeAll();
+                        resultat.setLayout(new GridLayout(0,2));
+                        list =affichFull("hospitalisation"); //on appelle la fonction de base des requetes
+                        this.result(list);
+                    }
+                    else{
+                        if(hos0.compareTo("")!=0){
+                            if(!firstCondition){
+                                requete +=" AND ";
+                            }
+                            requete +="no_malade="+hos0+"'";
+                            firstCondition = false;
+                            }
+                        if(hos1.compareTo("")!=0){
+                            if(!firstCondition){
+                                requete +=" AND ";
+                            }
+                            requete +="code_service="+hos1+"'";
+                            firstCondition = false;
+                            }
+                        if(hos2.compareTo("")!=0){
+                            if(!firstCondition){
+                                requete +=" AND ";
+                            }
+                            requete +="no_chambre="+hos2+"'";
+                            firstCondition = false;
+                            }
+                        if(hos3.compareTo("")!=0){
+                            if(!firstCondition){
+                                requete +=" AND ";
+                            }
+                            requete +="lit="+hos3+"'";
+                            firstCondition = false;
+                            }
+                        
+                        resultat.removeAll();
+                        resultat.setLayout(new GridLayout(0,2));
+                        list = requete("hospitalisation",requete);
+                        this.result(list);
+                    }
+                    break;
+                    
+                case 7 :
+                    String soi0 = attributs.txt_soin.get(0).getText().trim();
+                    String soi1 = attributs.txt_soin.get(1).getText().trim();
+                    
+                    
+                    if(soi0.compareTo("")==0 && soi1.compareTo("")==0){
+                        resultat.removeAll();
+                        resultat.setLayout(new GridLayout(0,2));
+                        list =affichFull("soigne"); //on appelle la fonction de base des requetes
+                        this.result(list);
+                    }
+                    else{
+                        if(soi0.compareTo("")!=0){
+                            if(!firstCondition){
+                                requete +=" AND ";
+                            }
+                            requete +="no_docteur="+soi0+"'";
+                            firstCondition = false;
+                            }
+                        if(soi1.compareTo("")!=0){
+                            if(!firstCondition){
+                                requete +=" AND ";
+                            }
+                            requete +="no_malade="+soi1+"'";
+                            firstCondition = false;
+                            }
+                        
+                        
+                        resultat.removeAll();
+                        resultat.setLayout(new GridLayout(0,2));
+                        list = requete("soigne",requete);
+                        this.result(list);
+                    }
+                    break;
                 default:
                     break;
             }
