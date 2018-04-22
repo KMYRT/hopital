@@ -260,6 +260,7 @@ public class Fenetre extends JFrame implements ActionListener {
             requete = "";
             ArrayList list = null;
             switch(index){
+                
                 case 2 :
                     String emp0 = attributs.txt_employe.get(0).getText().trim();
                     String emp1 = attributs.txt_employe.get(1).getText().trim();
@@ -317,6 +318,41 @@ public class Fenetre extends JFrame implements ActionListener {
                         this.result(list);
                     }
                     break;
+                    
+                case 3:
+                    String doc0 = attributs.txt_docteur.get(0).getText().trim();
+                    String doc1 = attributs.txt_docteur.get(1).getText().trim();
+                    
+                    if(doc0.compareTo("")==0 && doc1.compareTo("")==0){ // si aucune saisie 
+                        resultat.removeAll();
+                        resultat.setLayout(new GridLayout(0,2));
+                        list =affichFull("docteur"); //on appelle la fonction de base des requetes
+                        this.result(list);
+                    }
+                    else{
+                        if(doc0.compareTo("")!=0){
+                            nb = Integer.parseInt(attributs.txt_docteur.get(0).getText().trim());
+                            if(!firstCondition){
+                                requete +=" AND ";
+                            }
+                            requete +="numero="+nb;
+                            firstCondition = false;
+                            }
+                        if(doc1.compareTo("")!=0){
+                            if(!firstCondition){
+                                requete +=" AND ";
+                            }
+                            requete +="specialite='"+doc1+"'";
+                            firstCondition = false;
+                        }
+                        resultat.removeAll();
+                        resultat.setLayout(new GridLayout(0,2));
+                        System.out.println(requete);
+                        list = requete("docteur",requete);
+                        this.result(list);
+                    }
+                    break;
+                    
                 case 4:
                     String inf0 = attributs.txt_infirmier.get(0).getText().trim();
                     String inf1 = attributs.txt_infirmier.get(1).getText().trim();
@@ -366,6 +402,7 @@ public class Fenetre extends JFrame implements ActionListener {
                         this.result(list);
                     }
                     break;
+                
                 case 5 :
                     String mal0 = attributs.txt_malade.get(0).getText().trim();
                     String mal1 = attributs.txt_malade.get(1).getText().trim();
