@@ -170,7 +170,8 @@ public class ModiFen extends JFrame implements ActionListener {
                         //nb0 = Integer.parseInt(emp0);
                         resultat.removeAll();
                         resultat.setLayout(new GridLayout(0,2));
-                        requete = "INSERT INTO employe (numero,nom,prenom,adresse,tel) VALUES ('"+emp0+"','"+emp1+"','"+emp2+"','"+emp4+"','"+emp3+"')";addAtt(requete);
+                        requete = "INSERT INTO employe (numero,nom,prenom,adresse,tel) VALUES ('"+emp0+"','"+emp1+"','"+emp2+"','"+emp4+"','"+emp3+"')";
+                        addAtt(requete);
                         list = affichFull("employe");
                         resultat.removeAll();
                         resultat.setLayout(new GridLayout(0,2));
@@ -180,13 +181,127 @@ public class ModiFen extends JFrame implements ActionListener {
                     
                 case 3: //Docteur
                     
+                    String doc0 = menu.txt_docteur.get(0).getText().trim();
+                    String doc1 = menu.txt_docteur.get(1).getText().trim();
+                    
+                    if(doc0.compareTo("")==0 | doc1.compareTo("")==0){ // si aucune saisie 
+                        resultat.removeAll();
+                        System.out.println("Remplir tout les champs !");
+                    }
+                    else{
+                        //nb0 = Integer.parseInt(emp0);
+                        resultat.removeAll();
+                        resultat.setLayout(new GridLayout(0,2));
+                        requete = "INSERT INTO docteur (numero,specialite) VALUES ('"+doc0+"','"+doc1+"')";
+                        addAtt(requete);
+                        list = affichFull("docteur");
+                        resultat.removeAll();
+                        resultat.setLayout(new GridLayout(0,2));
+                        this.result(list);
+                    }
+                    break;
+                    
+                    
+                    
                 case 4: //Infirmier
+                    
+                    String inf0 = menu.txt_infirmier.get(0).getText().trim();
+                    String inf1 = menu.txt_infirmier.get(1).getText().trim();
+                    String inf2 = menu.txt_infirmier.get(2).getText().trim();
+                    String inf3 = menu.txt_infirmier.get(3).getText().trim();
+                    
+                    if(inf0.compareTo("")==0 | inf1.compareTo("")==0 | inf2.compareTo("")==0 | inf3.compareTo("")==0){ // si il manque une saisie
+                        resultat.removeAll();
+                        System.out.println("Remplir tout les champs !");
+                    }
+                    else{
+                        //nb1 = Integer.parseInt(cha1);
+                        //nb2 = Integer.parseInt(cha2);
+                        //nb3 = Integer.parseInt(cha3);
+                        resultat.removeAll();
+                        resultat.setLayout(new GridLayout(0,2));
+                        requete = "INSERT INTO infirmier (numero,code_service,rotation,salaire) VALUES ('"+inf0+"','"+inf1+"','"+inf2+"','"+inf3+"')";
+                        addAtt(requete);
+                        list = affichFull("infirmier");
+                        resultat.removeAll();
+                        resultat.setLayout(new GridLayout(0,2));
+                        this.result(list);
+                    }
+                break;
+                    
+              
                     
                 case 5: //Malade
                     
+                    String mal0 = menu.txt_malade.get(0).getText().trim();
+                    String mal1 = menu.txt_malade.get(1).getText().trim();
+                    String mal2 = menu.txt_malade.get(2).getText().trim();
+                    String mal3 = menu.txt_malade.get(3).getText().trim();
+                    String mal4 = menu.txt_malade.get(4).getText().trim();
+                    String mal5 = menu.txt_malade.get(5).getText().trim();
+                   
+                    
+                    if(mal0.compareTo("")==0 | mal1.compareTo("")==0 | mal2.compareTo("")==0 | mal3.compareTo("")==0 | mal4.compareTo("")==0 | mal5.compareTo("")==0){ // si aucune saisie 
+                        resultat.removeAll();
+                        System.out.println("Remplir tout les champs !");
+                    }
+                    else{
+                        //nb0 = Integer.parseInt(emp0);
+                        resultat.removeAll();
+                        resultat.setLayout(new GridLayout(0,2));
+                        requete = "INSERT INTO malade (numero,nom,prenom,tel,adresse,mutuelle) VALUES ('"+mal0+"','"+mal1+"','"+mal2+"','"+mal3+"','"+mal4+"','"+mal5+"')";
+                        addAtt(requete);
+                        list = affichFull("malade");
+                        resultat.removeAll();
+                        resultat.setLayout(new GridLayout(0,2));
+                        this.result(list);
+                    }
+                    break;
+                    
                 case 6: //Hospitalisation
                     
+                    String hos0 = menu.txt_hospitalisation.get(0).getText().trim();
+                    String hos1 = menu.txt_hospitalisation.get(1).getText().trim();
+                    String hos2 = menu.txt_hospitalisation.get(2).getText().trim();
+                    String hos3 = menu.txt_hospitalisation.get(3).getText().trim();
+                    
+                    if(hos0.compareTo("")==0 | hos1.compareTo("")==0 | hos2.compareTo("")==0 | hos3.compareTo("")==0){ // si il manque une saisie
+                        resultat.removeAll();
+                        System.out.println("Remplir tout les champs !");
+                    }
+                    else{
+                        resultat.removeAll();
+                        resultat.setLayout(new GridLayout(0,2));
+                        requete = "INSERT INTO hospitalisation (no_malade,code_service,no_chambre,lit) VALUES ('"+hos0+"','"+hos1+"','"+hos2+"','"+hos3+"')";
+                        addAtt(requete);
+                        list = affichFull("hospitalisation");
+                        resultat.removeAll();
+                        resultat.setLayout(new GridLayout(0,2));
+                        this.result(list);
+                    }
+                break;
+                    
                 case 7: //Soin
+                    
+                    String soi0 = menu.txt_soin.get(0).getText().trim();
+                    String soi1 = menu.txt_soin.get(1).getText().trim();
+                    
+                    if(soi0.compareTo("")==0 | soi1.compareTo("")==0){ // si aucune saisie 
+                        resultat.removeAll();
+                        System.out.println("Remplir tout les champs !");
+                    }
+                    else{
+                        //nb0 = Integer.parseInt(emp0);
+                        resultat.removeAll();
+                        resultat.setLayout(new GridLayout(0,2));
+                        requete = "INSERT INTO soigne (no_docteur,no_malade) VALUES ('"+soi0+"','"+soi1+"')";
+                        addAtt(requete);
+                        list = affichFull("soigne");
+                        resultat.removeAll();
+                        resultat.setLayout(new GridLayout(0,2));
+                        this.result(list);
+                    }
+                    break;
                         
             }
                    
