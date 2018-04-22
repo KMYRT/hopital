@@ -12,8 +12,13 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneLayout;
@@ -80,15 +85,67 @@ public class RequAjout extends JFrame implements ActionListener{
         b10.addActionListener(this);
     }
 
+     //ajout des resultats au pan de resultats 
+    public void result(ArrayList l){
+        String str="";
+        for(int i=0;i<l.size();i++){
+            str = l.get(i).toString();
+            resultat.add(new JLabel(str));
+            str= "";
+        }
+            
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Object source = e.getSource();
+        ArrayList<String> list = new ArrayList<String>();
+        if (source == b1){
+            try {
+                resultat.removeAll();
+                resultat.setLayout(new GridLayout(0,1));
+                list=connexion.remplirChampsRequete(connexion.requetes.get(0));
+                this.result(list);
+            } catch (SQLException ex) {
+                System.out.println("Erreur SQL");
+            }
+            
+            
+        }
+        if (source == b2){
+            
+        }
+        if (source == b3){
+            
+        }
+        if (source == b4){
+            
+        }
+        if (source == b5){
+            
+        }
+        if (source == b6){
+            
+        }
+        if (source == b7){
+            
+        }
+        if (source == b8){
+            
+        }
+        if (source == b9){
+            
+        }
+        if (source == b10){
+            
+        }
+    
     }
         
         
         
         
-    }
+}
 
     
     
