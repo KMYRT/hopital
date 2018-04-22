@@ -44,7 +44,7 @@ public class Fenetre extends JFrame implements ActionListener {
     private JPanel panECE,panRecher,panBDD,pan1,pan2,pan3,pan4,resultat;
     private JScrollPane scroll;
     private ModiFen modif;
-    private requAjout reqSelect;
+    private RequAjout reqSelect;
    
     
     
@@ -230,12 +230,10 @@ public class Fenetre extends JFrame implements ActionListener {
      */
     private void remplirRequetes() {
         connexion.ajouterRequete("SELECT prenom, nom FROM malade WHERE mutuelle='MAAF;");
-        connexion.ajouterRequete("SELECT employe.prenom, Emp.*, Mission.* FROM Dept, Emp, Mission WHERE Dept.deptno=Emp.deptno AND Emp.empno=Mission.empno;");
-        connexion.ajouterRequete("SELECT AVG (Emp.sal) FROM Emp, Mission WHERE Emp.empno = Mission.empno;");
-        connexion.ajouterRequete("SELECT Dept.*, Emp.* FROM Dept, Emp WHERE Dept.deptno=Emp.deptno AND comm>0;");
-        connexion.ajouterRequete("SELECT hiredate, empno, ename FROM Emp WHERE (((hiredate)>='1981-05-01' And (hiredate)<'1981-05-31'))ORDER BY hiredate;");
-        connexion.ajouterRequete("SELECT ename, job FROM Emp ORDER BY job;");
-        connexion.ajouterRequete("SELECT DISTINCT dname, job FROM Dept, Emp WHERE Dept.deptno=Emp.deptno AND job='Clerk';");
+        connexion.ajouterRequete("SELECT employe.prenom, employe.nom FROM employe, infirmier WHERE infirmier.rotation='nuit' AND employe.numero=infirmier.numero;");
+        connexion.ajouterRequete("SELECT service.nom, service.batiment, service.directeur, employe.prenom, employe.nom, docteur.specialite FROM service, employe, docteur WHERE service.directeur=docteur.numero AND employe.numero=docteur.numero;");
+        connexion.ajouterRequete("SELECT hospitalisation.lit, hospitalisation.no_chambre, service.nom, malade.prenom, malade.nom, malade.mutuelle FROM hospitalisation, service, malade WHERE service.batiment='B' AND malade.mutuelle LIKE 'MN%' AND service.code=hospitalisation.code_service AND malade.numero=hospitalisation.no_malade;");
+        
     }
     
     
@@ -265,7 +263,7 @@ public class Fenetre extends JFrame implements ActionListener {
             menu0.setSelectedIndex(2);
         }
         else if (source == exeRequete){
-            this.reqSelect = new requAjout(connexion);
+            this.reqSelect = new RequAjout(connexion);
         }
         
         else if(source == modifBDD ){
