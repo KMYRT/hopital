@@ -395,7 +395,7 @@ public class Fenetre extends JFrame implements ActionListener {
                             }
                         resultat.removeAll();
                         resultat.setLayout(new GridLayout(0,2));
-                        list = requete("infirmier",requete);
+                        list = requete("infirmier",requete); //Commentaire bidon
                         this.result(list);
                     }
                     break;
