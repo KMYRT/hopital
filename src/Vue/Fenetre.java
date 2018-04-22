@@ -274,11 +274,10 @@ public class Fenetre extends JFrame implements ActionListener {
                     }
                     else{
                         if(ser0.compareTo("")!=0){
-                            nb = Integer.parseInt(attributs.txt_service.get(0).getText().trim());
                             if(!firstCondition){
                                 requete +=" AND ";
                             }
-                            requete +="code="+nb;
+                            requete +="code="+ser0+"'";
                             firstCondition = false;
                             }
                         if(ser1.compareTo("")!=0){
@@ -324,31 +323,32 @@ public class Fenetre extends JFrame implements ActionListener {
                     }
                     else{
                         if(cha0.compareTo("")!=0){
+                            nb = Integer.parseInt(attributs.txt_chambre.get(0).getText().trim());
                             if(!firstCondition){
                                 requete +=" AND ";
                             }
-                            requete +="no_chambre="+cha1+"'";
+                            requete +="no_chambre="+nb;
                             firstCondition = false;
                             }
                         if(cha1.compareTo("")!=0){
                             if(!firstCondition){
                                 requete +=" AND ";
                             }
-                            requete +="surveillant="+cha1+"'";
+                            requete +="code_service="+cha1+"'";
                             firstCondition = false;
                             }
                         if(cha2.compareTo("")!=0){
                             if(!firstCondition){
                                 requete +=" AND ";
                             }
-                            requete +="nb_lits="+cha2+"'";
+                            requete +="surveillant="+cha2+"'";
                             firstCondition = false;
                             }
                         if(cha3.compareTo("")!=0){
                             if(!firstCondition){
                                 requete +=" AND ";
                             }
-                            requete +="code_service="+cha3+"'";
+                            requete +="nb_lits="+cha3+"'";
                             firstCondition = false;
                             }
                         
@@ -576,10 +576,11 @@ public class Fenetre extends JFrame implements ActionListener {
                     }
                     else{
                         if(hos0.compareTo("")!=0){
+                            nb = Integer.parseInt(attributs.txt_hospitalisation.get(0).getText().trim());
                             if(!firstCondition){
                                 requete +=" AND ";
                             }
-                            requete +="no_malade="+hos0+"'";
+                            requete +="no_malade="+nb;
                             firstCondition = false;
                             }
                         if(hos1.compareTo("")!=0){
@@ -590,10 +591,11 @@ public class Fenetre extends JFrame implements ActionListener {
                             firstCondition = false;
                             }
                         if(hos2.compareTo("")!=0){
+                            nb = Integer.parseInt(attributs.txt_hospitalisation.get(2).getText().trim());
                             if(!firstCondition){
                                 requete +=" AND ";
                             }
-                            requete +="no_chambre="+hos2+"'";
+                            requete +="no_chambre="+nb;
                             firstCondition = false;
                             }
                         if(hos3.compareTo("")!=0){
@@ -624,17 +626,19 @@ public class Fenetre extends JFrame implements ActionListener {
                     }
                     else{
                         if(soi0.compareTo("")!=0){
+                            nb = Integer.parseInt(attributs.txt_soin.get(0).getText().trim());
                             if(!firstCondition){
                                 requete +=" AND ";
                             }
-                            requete +="no_docteur="+soi0+"'";
+                            requete +="no_docteur="+nb;
                             firstCondition = false;
                             }
                         if(soi1.compareTo("")!=0){
+                            nb = Integer.parseInt(attributs.txt_soin.get(1).getText().trim());
                             if(!firstCondition){
                                 requete +=" AND ";
                             }
-                            requete +="no_malade="+soi1+"'";
+                            requete +="no_malade="+nb;
                             firstCondition = false;
                             }
                         
