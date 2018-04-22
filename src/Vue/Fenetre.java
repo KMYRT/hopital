@@ -44,6 +44,7 @@ public class Fenetre extends JFrame implements ActionListener {
     private JPanel panECE,panRecher,panBDD,pan1,pan2,pan3,pan4,resultat;
     private JScrollPane scroll;
     private ModiFen modif;
+    private requAjout reqSelect;
    
     
     
@@ -250,8 +251,12 @@ public class Fenetre extends JFrame implements ActionListener {
             }
             menu0.setSelectedIndex(2);
         }
+        else if (source == exeRequete){
+            this.reqSelect = new FeneReq(connexion);
+        }
+        
         else if(source == modifBDD ){
-            this.modif=new ModiFen(connexion);
+            this.modif = new ModiFen(connexion);
         }
         else if (source==exeRecherche){
             boolean firstCondition = true;
@@ -268,8 +273,8 @@ public class Fenetre extends JFrame implements ActionListener {
                     
                     if(ser0.compareTo("")==0 && ser1.compareTo("")==0 && ser2.compareTo("")==0 && ser3.compareTo("")==0){
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
-                        list =affichFull("service"); //on appelle la fonction de base des requetes
+                        resultat.setLayout(new GridLayout(0,1));
+                        list =affichFull("service"); //on appelle la fonction basique des requetes
                         this.result(list);
                     }
                     else{
@@ -277,33 +282,33 @@ public class Fenetre extends JFrame implements ActionListener {
                             if(!firstCondition){
                                 requete +=" AND ";
                             }
-                            requete +="code="+ser0+"'";
+                            requete +="code='"+ser0+"'";
                             firstCondition = false;
                             }
                         if(ser1.compareTo("")!=0){
                             if(!firstCondition){
                                 requete +=" AND ";
                             }
-                            requete +="nom="+ser1+"'";
+                            requete +="nom='"+ser1+"'";
                             firstCondition = false;
                             }
                         if(ser2.compareTo("")!=0){
                             if(!firstCondition){
                                 requete +=" AND ";
                             }
-                            requete +="batiment="+ser2+"'";
+                            requete +="batiment='"+ser3+"'";
                             firstCondition = false;
                             }
                         if(ser3.compareTo("")!=0){
                             if(!firstCondition){
                                 requete +=" AND ";
                             }
-                            requete +="directeur="+ser3+"'";
+                            requete +="directeur='"+ser2+"'";
                             firstCondition = false;
                             }
                         
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         list = requete("service",requete);
                         this.result(list);
                     }
@@ -317,43 +322,43 @@ public class Fenetre extends JFrame implements ActionListener {
                     
                     if(cha0.compareTo("")==0 && cha1.compareTo("")==0 && cha2.compareTo("")==0 && cha3.compareTo("")==0){
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         list =affichFull("chambre"); //on appelle la fonction de base des requetes
                         this.result(list);
                     }
                     else{
                         if(cha0.compareTo("")!=0){
-                            nb = Integer.parseInt(attributs.txt_chambre.get(0).getText().trim());
+                            //nb = Integer.parseInt(attributs.txt_chambre.get(0).getText().trim());
                             if(!firstCondition){
                                 requete +=" AND ";
                             }
-                            requete +="no_chambre="+nb;
+                            requete +="no_chambre='"+cha0+"'";
                             firstCondition = false;
                             }
                         if(cha1.compareTo("")!=0){
                             if(!firstCondition){
                                 requete +=" AND ";
                             }
-                            requete +="code_service="+cha1+"'";
+                            requete +="code_service='"+cha1+"'";
                             firstCondition = false;
                             }
                         if(cha2.compareTo("")!=0){
                             if(!firstCondition){
                                 requete +=" AND ";
                             }
-                            requete +="surveillant="+cha2+"'";
+                            requete +="surveillant='"+cha2+"'";
                             firstCondition = false;
                             }
                         if(cha3.compareTo("")!=0){
                             if(!firstCondition){
                                 requete +=" AND ";
                             }
-                            requete +="nb_lits="+cha3+"'";
+                            requete +="nb_lits='"+cha3+"'";
                             firstCondition = false;
                             }
                         
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         list = requete("chambre",requete);
                         this.result(list);
                     }
@@ -368,7 +373,7 @@ public class Fenetre extends JFrame implements ActionListener {
                     
                     if(emp0.compareTo("")==0 && emp1.compareTo("")==0 && emp2.compareTo("")==0 && emp3.compareTo("")==0&& emp4.compareTo("")==0){ // si aucune saisie 
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         list =affichFull("employe"); //on appelle la fonction de base des requetes
                         this.result(list);
                     }
@@ -410,7 +415,7 @@ public class Fenetre extends JFrame implements ActionListener {
                         }
                         
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         list = requete("employe",requete);
                         this.result(list);
                     }
@@ -422,7 +427,7 @@ public class Fenetre extends JFrame implements ActionListener {
                     
                     if(doc0.compareTo("")==0 && doc1.compareTo("")==0){ // si aucune saisie 
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         list =affichFull("docteur"); //on appelle la fonction de base des requetes
                         this.result(list);
                     }
@@ -443,7 +448,7 @@ public class Fenetre extends JFrame implements ActionListener {
                             firstCondition = false;
                         }
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         list = requete("docteur",requete);
                         this.result(list);
                     }
@@ -457,7 +462,7 @@ public class Fenetre extends JFrame implements ActionListener {
                     
                     if(inf0.compareTo("")==0 && inf1.compareTo("")==0 && inf2.compareTo("")==0 && inf3.compareTo("")==0){ // si aucune saisie 
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         list =affichFull("infirmier"); //on appelle la fonction de base des requetes
                         this.result(list);
                     }
@@ -492,7 +497,7 @@ public class Fenetre extends JFrame implements ActionListener {
                             firstCondition = false;
                             }
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         list = requete("infirmier",requete); //Commentaire bidon
                         this.result(list);
                     }
@@ -508,7 +513,7 @@ public class Fenetre extends JFrame implements ActionListener {
                     
                     if(mal0.compareTo("")==0 && mal1.compareTo("")==0 && mal2.compareTo("")==0 && mal3.compareTo("")==0&& mal4.compareTo("")==0 && mal5.compareTo("")==0){ // si aucune saisie 
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         list =affichFull("malade"); //on appelle la fonction de base des requetes
                         this.result(list);
                     }
@@ -556,7 +561,7 @@ public class Fenetre extends JFrame implements ActionListener {
                             requete +="mutuelle='"+mal5+"'";
                         }
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         list = requete("malade",requete);
                         this.result(list);
                     }
@@ -570,7 +575,7 @@ public class Fenetre extends JFrame implements ActionListener {
                     
                     if(hos0.compareTo("")==0 && hos1.compareTo("")==0 && hos2.compareTo("")==0 && hos3.compareTo("")==0){
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         list =affichFull("hospitalisation"); //on appelle la fonction de base des requetes
                         this.result(list);
                     }
@@ -607,7 +612,7 @@ public class Fenetre extends JFrame implements ActionListener {
                             }
                         
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         list = requete("hospitalisation",requete);
                         this.result(list);
                     }
@@ -620,7 +625,7 @@ public class Fenetre extends JFrame implements ActionListener {
                     
                     if(soi0.compareTo("")==0 && soi1.compareTo("")==0){
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         list =affichFull("soigne"); //on appelle la fonction de base des requetes
                         this.result(list);
                     }
@@ -644,7 +649,7 @@ public class Fenetre extends JFrame implements ActionListener {
                         
                         
                         resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
+                        resultat.setLayout(new GridLayout(0,1));
                         list = requete("soigne",requete);
                         this.result(list);
                     }
