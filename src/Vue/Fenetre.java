@@ -313,7 +313,6 @@ public class Fenetre extends JFrame implements ActionListener {
                         
                         resultat.removeAll();
                         resultat.setLayout(new GridLayout(0,2));
-                        System.out.println(requete);
                         list = requete("employe",requete);
                         this.result(list);
                     }
@@ -347,7 +346,6 @@ public class Fenetre extends JFrame implements ActionListener {
                         }
                         resultat.removeAll();
                         resultat.setLayout(new GridLayout(0,2));
-                        System.out.println(requete);
                         list = requete("docteur",requete);
                         this.result(list);
                     }
@@ -397,7 +395,6 @@ public class Fenetre extends JFrame implements ActionListener {
                             }
                         resultat.removeAll();
                         resultat.setLayout(new GridLayout(0,2));
-                        System.out.println(requete);
                         list = requete("infirmier",requete);
                         this.result(list);
                     }
@@ -462,7 +459,6 @@ public class Fenetre extends JFrame implements ActionListener {
                         }
                         resultat.removeAll();
                         resultat.setLayout(new GridLayout(0,2));
-                        System.out.println(requete);
                         list = requete("malade",requete);
                         this.result(list);
                     }
