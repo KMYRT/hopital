@@ -7,6 +7,8 @@ package Vue;
 //
 import Modèle.Connexion;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneLayout;
 
 /**
  *
@@ -36,28 +39,38 @@ public class ModiFen extends JFrame implements ActionListener {
         this.setSize(1200, 800);
         //récupère connexion de la fen principale
         this.connexion = connexion;
+        
+        //instanciation et placement des objets graphiques
         this.menu = new Panel();
         this.pan= new JPanel();
+        this.pan1= new JPanel();
         this.resultat= new JPanel();
-        
         this.setLayout(new BorderLayout());
         this.add(menu,BorderLayout.NORTH);
-        
-        //Boutons
         ajoute = new JButton("Ajouter");
         modifie = new JButton("Modifier");
         supprime = new JButton("Supprimer");
+        
+        resultat.setBackground(Color.WHITE);
+        scroll = new JScrollPane(resultat,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.setLayout(new ScrollPaneLayout());
+        scroll.setSize(new Dimension(200, 200));
         
         pan.setLayout(new GridLayout(1,3));
         pan.add(ajoute);
         pan.add(modifie);
         pan.add(supprime);
         
+        pan1.setLayout(new BorderLayout());
+        pan1.add(pan,BorderLayout.SOUTH);
+        pan1.add(scroll,BorderLayout.CENTER);
+        
+        
         ajoute.addActionListener(this);
         modifie.addActionListener(this);
         supprime.addActionListener(this);
         
-        this.add(pan,BorderLayout.SOUTH);
+        this.add(pan1,BorderLayout.CENTER);
         setVisible(true);
         
         
@@ -65,13 +78,13 @@ public class ModiFen extends JFrame implements ActionListener {
     
     
     public ArrayList affichFull(String table){
-           ArrayList arrayL = new ArrayList();
+           ArrayList l = new ArrayList();
             try {
-                arrayL= connexion.remplirChampsRequete("SELECT * FROM "+table);
+                l= connexion.remplirChampsRequete("SELECT * FROM "+table);
             } catch (SQLException e) {
                 System.out.println("Erreur SQL");
             }
-            return arrayL;
+            return l;
     }
     
     //ajoute un objet à la table avec tout ses attributs
@@ -87,7 +100,7 @@ public class ModiFen extends JFrame implements ActionListener {
     //supprime l'objet selon les WHERE
     public void deleteObj(String table,String requete){
         try {
-             connexion.executeUpdate("DELETE FROM " +table+ " WHERE " + requete);
+             connexion.executeUpdate("DELETE FROM " +table+ " WHERE "+requete);
         } catch (Exception exc) {
             System.out.println("Erreur SQL");
             exc.printStackTrace();
@@ -103,7 +116,6 @@ public class ModiFen extends JFrame implements ActionListener {
             resultat.add(new JLabel(str));
             str= "";
         }
-            
     }
     
     
@@ -132,8 +144,6 @@ public class ModiFen extends JFrame implements ActionListener {
                     }
                     else{
                         //nb= Integer.parseInt(menu.txt_service.get(3).getText().trim());
-                        resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
                         requete = "INSERT INTO service (code, nom, batiment, directeur) VALUES ('"+ser0+"', '"+ser1+"', '"+ser2+"', '"+ser3+"')";
                         addObj(requete);
                         list = affichFull("service");
@@ -158,8 +168,6 @@ public class ModiFen extends JFrame implements ActionListener {
                         //nb1 = Integer.parseInt(cha1);
                         //nb2 = Integer.parseInt(cha2);
                         //nb3 = Integer.parseInt(cha3);
-                        resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
                         requete = "INSERT INTO chambre (code_service,no_chambre,surveillant,nb_lits) VALUES ('"+cha0+"','"+cha1+"','"+cha2+"','"+cha3+"')";
                         addObj(requete);
                         list = affichFull("chambre");
@@ -183,8 +191,6 @@ public class ModiFen extends JFrame implements ActionListener {
                     }
                     else{
                         //nb0 = Integer.parseInt(emp0);
-                        resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
                         requete = "INSERT INTO employe (numero,nom,prenom,adresse,tel) VALUES ('"+emp0+"','"+emp1+"','"+emp2+"','"+emp4+"','"+emp3+"')";
                         addObj(requete);
                         list = affichFull("employe");
@@ -205,8 +211,6 @@ public class ModiFen extends JFrame implements ActionListener {
                     }
                     else{
                         //nb0 = Integer.parseInt(emp0);
-                        resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
                         requete = "INSERT INTO docteur (numero,specialite) VALUES ('"+doc0+"','"+doc1+"')";
                         addObj(requete);
                         list = affichFull("docteur");
@@ -233,8 +237,6 @@ public class ModiFen extends JFrame implements ActionListener {
                         //nb1 = Integer.parseInt(cha1);
                         //nb2 = Integer.parseInt(cha2);
                         //nb3 = Integer.parseInt(cha3);
-                        resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
                         requete = "INSERT INTO infirmier (numero,code_service,rotation,salaire) VALUES ('"+inf0+"','"+inf1+"','"+inf2+"','"+inf3+"')";
                         addObj(requete);
                         list = affichFull("infirmier");
@@ -262,8 +264,6 @@ public class ModiFen extends JFrame implements ActionListener {
                     }
                     else{
                         //nb0 = Integer.parseInt(emp0);
-                        resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
                         requete = "INSERT INTO malade (numero,nom,prenom,tel,adresse,mutuelle) VALUES ('"+mal0+"','"+mal1+"','"+mal2+"','"+mal3+"','"+mal4+"','"+mal5+"')";
                         addObj(requete);
                         list = affichFull("malade");
@@ -285,8 +285,6 @@ public class ModiFen extends JFrame implements ActionListener {
                         System.out.println("Remplir tout les champs !");
                     }
                     else{
-                        resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
                         requete = "INSERT INTO hospitalisation (no_malade,code_service,no_chambre,lit) VALUES ('"+hos0+"','"+hos1+"','"+hos2+"','"+hos3+"')";
                         addObj(requete);
                         list = affichFull("hospitalisation");
@@ -307,8 +305,6 @@ public class ModiFen extends JFrame implements ActionListener {
                     }
                     else{
                         //nb0 = Integer.parseInt(emp0);
-                        resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
                         requete = "INSERT INTO soigne (no_docteur,no_malade) VALUES ('"+soi0+"','"+soi1+"')";
                         addObj(requete);
                         list = affichFull("soigne");
@@ -316,6 +312,8 @@ public class ModiFen extends JFrame implements ActionListener {
                         resultat.setLayout(new GridLayout(0,2));
                         this.result(list);
                     }
+                    break;
+                default: 
                     break;
                         
             }
@@ -339,44 +337,41 @@ public class ModiFen extends JFrame implements ActionListener {
                     String ser3 = menu.txt_service.get(3).getText().trim();
                     
                     if(ser0.compareTo("")==0 && ser1.compareTo("")==0 && ser2.compareTo("")==0 && ser3.compareTo("")==0){
-                        resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
-                        list =affichFull("service"); //on appelle la fonction de base des requetes
-                        this.result(list);
+                        System.out.println("Veuillez remplir au moins un champs");
                     }
                     else{
                         if(ser0.compareTo("")!=0){
                             if(!firstCondition){
                                 requete +=" AND ";
                             }
-                            requete +="code="+ser0+"'";
+                            requete +="code='"+ser0+"'";
                             firstCondition = false;
                             }
                         if(ser1.compareTo("")!=0){
                             if(!firstCondition){
                                 requete +=" AND ";
                             }
-                            requete +="nom="+ser1+"'";
+                            requete +="nom='"+ser1+"'";
                             firstCondition = false;
                             }
                         if(ser2.compareTo("")!=0){
                             if(!firstCondition){
                                 requete +=" AND ";
                             }
-                            requete +="batiment="+ser2+"'";
+                            requete +="batiment='"+ser2+"'";
                             firstCondition = false;
                             }
                         if(ser3.compareTo("")!=0){
                             if(!firstCondition){
                                 requete +=" AND ";
                             }
-                            requete +="directeur="+ser3+"'";
+                            requete +="directeur='"+ser3+"'";
                             firstCondition = false;
                             }
-                        
+                        deleteObj("service",requete);
                         resultat.removeAll();
                         resultat.setLayout(new GridLayout(0,2));
-                        deleteObj("service",requete);
+                        list = affichFull("service");
                         this.result(list);
                     }
                     break;
@@ -388,10 +383,7 @@ public class ModiFen extends JFrame implements ActionListener {
                     String cha3 = menu.txt_chambre.get(3).getText().trim();
                     
                     if(cha0.compareTo("")==0 && cha1.compareTo("")==0 && cha2.compareTo("")==0 && cha3.compareTo("")==0){
-                        resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
-                        list =affichFull("chambre"); //on appelle la fonction de base des requetes
-                        this.result(list);
+                        System.out.println("Veuillez remplir au moins un champs");
                     }
                     else{
                         if(cha0.compareTo("")!=0){
@@ -424,9 +416,10 @@ public class ModiFen extends JFrame implements ActionListener {
                             firstCondition = false;
                             }
                         
+                        deleteObj("chambre",requete);
                         resultat.removeAll();
                         resultat.setLayout(new GridLayout(0,2));
-                        deleteObj("chambre",requete);
+                        list = affichFull("chambre");
                         this.result(list);
                     }
                     break;
@@ -439,10 +432,7 @@ public class ModiFen extends JFrame implements ActionListener {
                     String emp4 = menu.txt_employe.get(4).getText().trim();
                     
                     if(emp0.compareTo("")==0 && emp1.compareTo("")==0 && emp2.compareTo("")==0 && emp3.compareTo("")==0&& emp4.compareTo("")==0){ // si aucune saisie 
-                        resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
-                        list =affichFull("employe"); //on appelle la fonction de base des requetes
-                        this.result(list);
+                        System.out.println("Veuillez remplir au moins un champs");
                     }
                     else{
                         if(emp0.compareTo("")!=0){
@@ -481,9 +471,10 @@ public class ModiFen extends JFrame implements ActionListener {
                             requete +="adresse='"+emp4+"'";
                         }
                         
+                        deleteObj("employe",requete);
                         resultat.removeAll();
                         resultat.setLayout(new GridLayout(0,2));
-                        deleteObj("employe",requete);
+                        list = affichFull("employe");
                         this.result(list);
                     }
                     break;
@@ -493,10 +484,7 @@ public class ModiFen extends JFrame implements ActionListener {
                     String doc1 = menu.txt_docteur.get(1).getText().trim();
                     
                     if(doc0.compareTo("")==0 && doc1.compareTo("")==0){ // si aucune saisie 
-                        resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
-                        list =affichFull("docteur"); //on appelle la fonction de base des requetes
-                        this.result(list);
+                        System.out.println("Veuillez remplir au moins un champs");
                     }
                     else{
                         if(doc0.compareTo("")!=0){
@@ -514,9 +502,10 @@ public class ModiFen extends JFrame implements ActionListener {
                             requete +="specialite='"+doc1+"'";
                             firstCondition = false;
                         }
+                        deleteObj("docteur",requete);
                         resultat.removeAll();
                         resultat.setLayout(new GridLayout(0,2));
-                        deleteObj("docteur",requete);
+                        list = affichFull("docteur");
                         this.result(list);
                     }
                     break;
@@ -528,10 +517,7 @@ public class ModiFen extends JFrame implements ActionListener {
                     String inf3 = menu.txt_infirmier.get(3).getText().trim();
                     
                     if(inf0.compareTo("")==0 && inf1.compareTo("")==0 && inf2.compareTo("")==0 && inf3.compareTo("")==0){ // si aucune saisie 
-                        resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
-                        list =affichFull("infirmier"); //on appelle la fonction de base des requetes
-                        this.result(list);
+                        System.out.println("Veuillez remplir au moins un champs");
                     }
                     else{
                         if(inf0.compareTo("")!=0){
@@ -563,9 +549,10 @@ public class ModiFen extends JFrame implements ActionListener {
                             requete +="salaire='"+inf3+"'";
                             firstCondition = false;
                             }
+                        deleteObj("infirmier",requete);
                         resultat.removeAll();
                         resultat.setLayout(new GridLayout(0,2));
-                        deleteObj("infirmier",requete); //Commentaire bidon
+                        list = affichFull("infirmier");
                         this.result(list);
                     }
                     break;
@@ -579,10 +566,7 @@ public class ModiFen extends JFrame implements ActionListener {
                     String mal5 = menu.txt_malade.get(5).getText().trim();
                     
                     if(mal0.compareTo("")==0 && mal1.compareTo("")==0 && mal2.compareTo("")==0 && mal3.compareTo("")==0&& mal4.compareTo("")==0 && mal5.compareTo("")==0){ // si aucune saisie 
-                        resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
-                        list =affichFull("malade"); //on appelle la fonction de base des requetes
-                        this.result(list);
+                        System.out.println("Veuillez remplir au moins un champs");
                     }
                     else{
                         if(mal0.compareTo("")!=0){
@@ -627,9 +611,10 @@ public class ModiFen extends JFrame implements ActionListener {
                             }
                             requete +="mutuelle='"+mal5+"'";
                         }
+                        deleteObj("malade",requete);
                         resultat.removeAll();
                         resultat.setLayout(new GridLayout(0,2));
-                        deleteObj("malade",requete);
+                        list = affichFull("malade");
                         this.result(list);
                     }
                     break;
@@ -641,10 +626,7 @@ public class ModiFen extends JFrame implements ActionListener {
                     String hos3 = menu.txt_hospitalisation.get(3).getText().trim();
                     
                     if(hos0.compareTo("")==0 && hos1.compareTo("")==0 && hos2.compareTo("")==0 && hos3.compareTo("")==0){
-                        resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
-                        list =affichFull("hospitalisation"); //on appelle la fonction de base des requetes
-                        this.result(list);
+                        System.out.println("Veuillez remplir au moins un champs");
                     }
                     else{
                         if(hos0.compareTo("")!=0){
@@ -678,9 +660,10 @@ public class ModiFen extends JFrame implements ActionListener {
                             firstCondition = false;
                             }
                         
+                        deleteObj("hospitalisation",requete);
                         resultat.removeAll();
                         resultat.setLayout(new GridLayout(0,2));
-                        deleteObj("hospitalisation",requete);
+                        list = affichFull("hospitalisation");
                         this.result(list);
                     }
                     break;
@@ -691,10 +674,7 @@ public class ModiFen extends JFrame implements ActionListener {
                     
                     
                     if(soi0.compareTo("")==0 && soi1.compareTo("")==0){
-                        resultat.removeAll();
-                        resultat.setLayout(new GridLayout(0,2));
-                        list =affichFull("soigne"); //on appelle la fonction de base des requetes
-                        this.result(list);
+                        System.out.println("Veuillez remplir au moins un champs");
                     }
                     else{
                         if(soi0.compareTo("")!=0){
@@ -715,9 +695,10 @@ public class ModiFen extends JFrame implements ActionListener {
                             }
                         
                         
+                        deleteObj("soin",requete);
                         resultat.removeAll();
                         resultat.setLayout(new GridLayout(0,2));
-                        deleteObj("soigne",requete);
+                        list = affichFull("soin");
                         this.result(list);
                     }
                     break;
